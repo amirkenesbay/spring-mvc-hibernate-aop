@@ -24,15 +24,27 @@
     </tr>
 
     <c:forEach var="dep" items="${allDeps}">
+        <c:url var="updateButton" value="/updateDepartmentInfo">
+            <c:param name="depId" value="${dep.id}"/>
+        </c:url>
+        <c:url var="deleteButton" value="/deleteDepartment">
+            <c:param name="depId" value="${dep.id}"/>
+        </c:url>
         <tr>
             <td>${dep.name}</td>
             <td>&nbsp;&nbsp;&nbsp;&nbsp;${dep.minSalary}</td>
             <td>&nbsp;&nbsp;&nbsp;&nbsp;${dep.maxSalary}</td>
+            <td>
+                <input type="button" value="Update"
+                       onclick="window.location.href = '${updateButton}'"/>
+                <input type="button" value="Delete"
+                       onclick="window.location.href = '${deleteButton}'">
+            </td>
         </tr>
     </c:forEach>
 </table>
 <br>
 <input type="button" value="Add"
-    onclick="window.location.href = 'addNewDepartment'">
+       onclick="window.location.href = 'addNewDepartment'">
 </body>
 </html>

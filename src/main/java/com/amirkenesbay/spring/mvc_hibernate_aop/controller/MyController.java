@@ -59,8 +59,8 @@ public class MyController {
     }
 
     @RequestMapping("/saveDepartment")
-    public String saveDepartment(@ModelAttribute("department") @Valid Department department, BindingResult bindingResult){
-        if(bindingResult.hasErrors())
+    public String saveDepartment(@ModelAttribute("department") @Valid Department department, BindingResult bindingResult) {
+        if (bindingResult.hasErrors())
             return "department-info";
         departmentService.saveDepartment(department);
         return "redirect:/departments";
@@ -73,9 +73,22 @@ public class MyController {
         return "employee-info";
     }
 
+    @RequestMapping("/updateDepartmentInfo")
+    public String updateDepartment(@RequestParam("depId") int id, Model model) {
+        Department department = departmentService.getDepartment(id);
+        model.addAttribute("department", department);
+        return "department-info";
+    }
+
     @RequestMapping("/deleteEmployee")
     public String deleteEmployee(@RequestParam("empId") int id) {
         employeeService.deleteEmployee(id);
         return "redirect:/";
+    }
+
+    @RequestMapping("/deleteDepartment")
+    public String deleteDepartment(@RequestParam("depId") int id) {
+        departmentService.deleteDepartment(id);
+        return "redirect:/departments";
     }
 }
